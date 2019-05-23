@@ -93,7 +93,7 @@ const Lesson67 = () => {
   const [one, setOne] = React.useState('');
   const [two, setTwo] = React.useState('');
   const [three, setThree] = React.useState('');
-  
+
   const changeValueOne = event => setOne(event.target.value);
   const changeValueTwo = event => setTwo(event.target.value);
   const changeValueThree = event => setThree(event.target.value);
@@ -104,18 +104,18 @@ const Lesson67 = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-      <input type="text" onChange={changeValueOne} />
-      <input type="text" onChange={changeValueTwo} />
-      <input type="text" onChange={changeValueThree} />
-      <input type="submit" />
-    </form>
-    <p>{value}</p>
+        <input type="text" onChange={changeValueOne} />
+        <input type="text" onChange={changeValueTwo} />
+        <input type="text" onChange={changeValueThree} />
+        <input type="submit" />
+      </form>
+      <p>{value}</p>
     </div>
   )
 };
 
 const Lesson68 = () => {
-  
+
   return (
     0
   )
