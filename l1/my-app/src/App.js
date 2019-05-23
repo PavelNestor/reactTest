@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
 import Lesson1 from './lessons/lesson1';
 import Lesson2 from './lessons/lesson2';
+import Lesson4 from './lessons/lesson4';
+import Lesson5 from './lessons/lesson5';
+import Lesson6 from './lessons/lesson6';
 
 function App() {
   return (
@@ -17,10 +20,16 @@ function BasicExample() {
         <div><Link to="/home">home</Link></div>
         <div><Link to="/lesson1">Lesson1</Link></div>
         <div><Link to="/lesson2">Lesson2</Link></div>
+        <div><Link to="/lesson4">Lesson4</Link></div>
+        <div><Link to="/lesson5">Lesson5</Link></div>
+        <div><Link to="/lesson6">Lesson6</Link></div>
       </div>
       <Route path="/home" component={home} />
       <Route path="/lesson1" component={lesson1} />
       <Route path="/lesson2" component={lesson2} />
+      <Route path="/lesson4" component={lesson4} />
+      <Route path="/lesson5" component={lesson5} />
+      <Route path="/lesson6" component={lesson6} />
     </Router>
   );
 }
@@ -37,6 +46,21 @@ function lesson1() {
 function lesson2() {
   return (
     <Lesson2 />
+  );
+}
+function lesson4() {
+  return (
+    <Lesson4 />
+  );
+}
+function lesson5() {
+  return (
+    <Lesson5 />
+  );
+}
+function lesson6() {
+  return (
+    <Lesson6 />
   );
 }
 
