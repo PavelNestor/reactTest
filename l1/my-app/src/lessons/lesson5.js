@@ -51,11 +51,13 @@ const Lesson54 = () => {
     names.splice(index, 1)
     setNames(names.concat())
   }
-  return <div>
-    <ul>
-      {names.map((name, index) =>
-        <li key={index}>{name} <button onClick={()=>removeName(index)}>del</button></li>)}
-    </ul>
-    
-  </div>
+
+  return (
+    <div>
+      <ul>
+        {names.map((name, index) =>
+          <li key={index}>{name} <button onClick={() => removeName(index)}>del</button></li>)}
+      </ul>
+    </div>
+  )
 };

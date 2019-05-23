@@ -2,16 +2,97 @@ import React from 'react';
 
 export default function Lesson6() {
   return (
-    <div>
-      <div style={{ padding: '10px' }}>--- 6.1 На инпуты ----</div><div style={{ padding: '10px' }}><Lesson61 /></div>
-      <div style={{ padding: '10px' }}>--- 6.2 ----</div><div style={{ padding: '10px' }}><Lesson62 /></div>
-      <div style={{ padding: '10px' }}>--- 6.3 ----</div><div style={{ padding: '10px' }}><Lesson63 /></div>
-      <div style={{ padding: '10px' }}>--- 6.4 ----</div><div style={{ padding: '10px' }}><Lesson64 /></div>
-      <div style={{ padding: '10px' }}>--- 6.5 На submit----</div><div style={{ padding: '10px' }}><Lesson65 /></div>
-      <div style={{ padding: '10px' }}>--- 6.6 ----</div><div style={{ padding: '10px' }}><Lesson66 /></div>
-      <div style={{ padding: '10px' }}>--- 6.7 ----</div><div style={{ padding: '10px' }}><Lesson67 /></div>
-      <div style={{ padding: '10px' }}>--- 6.8 На формы + массивы ----</div><div style={{ padding: '10px' }}><Lesson68 /></div>
-    </div>
+    <div style={{ textAlign: 'center' }}>
+      <div style={{ border: '1px dotted grey' }}><h2 >Задачи для решения</h2></div>
+      {/* start */}
+      <div style={{ padding: '10px' }}>
+        <div>
+          <strong>--- 6.1 На инпуты ----</strong>
+          <br />
+          Дан инпут и абзац. Сделайте так, чтобы при наборе текста в инпуте он автоматически появлялся в этом абзаце.
+        </div>
+        <div><Lesson61 /></div>
+      </div>
+      {/* end */}
+      {/* start */}
+      <div style={{ padding: '10px' }}>
+        <strong>--- 6.2 ----</strong>
+        <br />
+        Модифицируйте предыдущую задачу так, чтобы текст в абзац выводился в верхнем регистре.
+        </div>
+      <div><Lesson62 /></div>
+      {/* end */}
+      {/* start */}
+      <div style={{ padding: '10px' }}>
+        <div>
+          <strong>--- 6.3 ----</strong>
+          <br />
+          Дан инпут и абзац. В инпут вводится возраст пользователя. Сделайте так, чтобы при наборе текста в абзаце автоматически появлялся год рождения пользователя.
+        </div>
+        <div><Lesson63 /></div>
+      </div>
+      {/* end */}
+      {/* start */}
+      <div style={{ padding: '10px' }}>
+        <div>
+          <strong>--- 6.4 ----</strong>
+          <br />
+          Дан инпут и 3 абзаца. В инпут вводится ФИО пользователя через пробел. Сделайте так, чтобы при наборе текста в первом абзаце появилась фамилия пользователя, во втором - имя, а в третьем - отчество.
+        </div>
+        <div><Lesson64 /></div>
+      </div>
+      {/* end */}
+      {/* start */}
+      <div style={{ padding: '10px' }}>
+        <div>
+          <strong>--- 6.5 На submit----</strong>
+          <br />
+          Дан инпут и кнопка submit. В инпут вводится текст. Сделайте так, чтобы по нажатию на кнопку этот текст вывелся в какой-нибудь абзац.
+        </div>
+        <div><Lesson65 /></div>
+      </div>
+      {/* end */}
+      {/* start */}
+      <div style={{ padding: '10px' }}>
+        <div>
+          <strong>--- 6.6 ----</strong>
+          <br />
+          Даны два инпута и кнопка. В инпуты вводятся числа. Сделайте так, чтобы по нажатию на кнопку под инпутами в какой-нибудь абзац вывелась сумма этих чисел.
+        </div>
+        <div><Lesson66 /></div>
+      </div>
+      {/* end */}
+      {/* start */}
+      <div style={{ padding: '10px' }}>
+        <div>
+          <strong>--- 6.7 ----</strong>
+          <br />
+          Даны 3 инпута и кнопка. В инпуты вводится имя, фамилия и отчество. Сделайте так, чтоб
+        </div>
+        <div><Lesson67 /></div>
+      </div>
+      {/* end */}
+      {/* start */}
+      <div style={{ padding: '10px' }}>
+        <div>
+          <strong>--- 6.8 На формы + массивы ----</strong>
+          <br />
+          Дан массив с именами пользователей. Выведите этот массив в виде списка ul. Также даны инпут и кнопка. Сделайте так, чтобы в инпут можно было ввести еще одно имя, нажать на кнопку - и это имя добавилось в конец списка ul.
+        </div>
+        <div><Lesson68 /></div>
+      </div>
+      {/* end */}
+      {/* start */}
+      <div style={{ padding: '5px' }}>
+        <div>
+          <strong>--- 6.9 ----</strong>
+          <br />
+          Модифицируйте предыдущую задачу так, чтобы в конце каждой li появилась кнопка для удаления этого пункта списка.
+      </div>
+        <div><Lesson69 /></div>
+      </div>
+      {/* end */}
+    </div >
   )
 }
 
@@ -34,7 +115,7 @@ const Lesson62 = () => {
 };
 
 const Lesson63 = () => {
-  const [value, setValue] = React.useState(2019);
+  const [value, setValue] = React.useState(0);
   const changeValue = (event) => setValue(2019 - event.target.value)
   return <div>
     <p>{value}</p>
@@ -115,8 +196,48 @@ const Lesson67 = () => {
 };
 
 const Lesson68 = () => {
+  const [value, setValue] = React.useState();
+  const [names, setNames] = React.useState(['Коля', 'Вася', 'Петя', 'Иван', 'Дима']);
+  const addValue = event => setValue(event.target.value);
+  const handleSubmit = event => {
+    setNames(names.concat([value]))
+    event.preventDefault();
+  }
+  return (
+    <div>
+      <ul>
+        {names.map((name, index) => <li key={index}>{name}</li>)}
+      </ul>
+      <form onSubmit={handleSubmit}>
+        <input type="text" onChange={addValue} />
+        <input type="submit" value="add" />
+      </form>
+    </div>
+  )
+};
+
+const Lesson69 = () => {
+  const [value, setValue] = React.useState();
+  const [names, setNames] = React.useState(['Коля', 'Вася', 'Петя', 'Иван', 'Дима']);
+  const addValue = event => setValue(event.target.value);
+  const handleSubmit = event => {
+    setNames(names.concat([value]))
+    event.preventDefault();
+  }
+  const removeName = (index) => {
+    names.splice(index, 1)
+    setNames(names.concat())
+  }
 
   return (
-    0
+    <div>
+      <ul>
+        {names.map((name, index) => <li key={index}>{name} <button onClick={() => removeName(index)}>del</button></li>)}
+      </ul>
+      <form onSubmit={handleSubmit}>
+        <input type="text" onChange={addValue} />
+        <input type="submit" value="add" />
+      </form>
+    </div>
   )
 };
