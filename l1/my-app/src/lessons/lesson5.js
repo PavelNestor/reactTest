@@ -23,7 +23,7 @@ const Lesson51 = () => {
 
 const Lesson52 = () => {
   const [names, setNames] = React.useState(['Коля', 'Вася', 'Петя', 'Иван', 'Дима']);
-  const addName = () => setNames(names.concat(['пункт']))
+  const addName = () => setNames(names.concat(['пункт']));
   return <div>
     <ul>
       {names.map((name, index) =>
@@ -47,9 +47,9 @@ const Lesson53 = () => {
 
 const Lesson54 = () => {
   const [names, setNames] = React.useState(['Коля', 'Вася', 'Петя', 'Иван', 'Дима']);
-  const removeName = (index) => {
-    names.splice(index, 1)
-    setNames(names.concat())
+  const removeName = index => {
+    names.splice(index, 1);
+    setNames(names.concat());
   }
 
   return (
