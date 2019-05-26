@@ -320,7 +320,7 @@ const Lesson611 = () => {
     { href: '1.html', text: 'ссылка 1' },
     { href: '2.html', text: 'ссылка 2' },
     { href: '3.html', text: 'ссылка 3' },
-  ])
+  ]);
   const [value, setValue] = React.useState();
   const handleInput = event => setValue(event.target.value);
 
