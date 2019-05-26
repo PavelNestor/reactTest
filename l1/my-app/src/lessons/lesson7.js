@@ -8,7 +8,7 @@ export default function Lesson7() {
     <div style={{ textAlign: 'center' }}>
       <div style={{ border: '1px dotted grey' }}><h2 >Задачи для решения</h2></div>
       {[Lesson71, Lesson72, Lesson73, Lesson74, Lesson75, Lesson76, Lesson77, Lesson78,
-        Lesson79, Lesson710, Lesson711,].map((Comp, index) => {
+        Lesson79, Lesson710, Lesson711, Lesson712, Lesson713].map((Comp, index) => {
           return (
             <div key={index}><WriteHeader num={index} /><Comp /></div>
           );
@@ -222,6 +222,118 @@ const Lesson711 = () => {
           <input type="submit" value="add" />
         </form>
       </div>
+    </div>
+  );
+};
+
+const Lesson712 = () => {
+  const [input, setInput] = React.useState(false);
+  const handleCheck = () => setInput(!input);
+  return (
+    <div>
+      <input type="checkbox" onChange={handleCheck} />
+      <input type="submit" value="add" disabled={input} />
+    </div>
+  );
+};
+
+const Lesson713 = () => {
+  const today = new Date();
+  // const [day, setDay] = React.useState(today.getDay());
+  // const [date, setDate] = React.useState(today.getDate()-1);
+  // const [month, setMonth] = React.useState(today.getMonth());
+  // const [year, setYear] = React.useState(today.getFullYear());
+  const days = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',];
+  const [selectedDate, setSelectedDate] = React.useState({
+    date: today.getDate()+1,
+    month: today.getMonth(),
+    year: today.getFullYear(),
+    day: days[today.getDay()],
+  });
+
+  
+  const dates = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",];
+  const years = [
+    2019,
+    2018,
+    2017,
+    2016,
+    2015,
+    2014,
+    2013,];
+
+
+  const handleSelectDate = event => {
+    //setDate(event.target.value);
+    setSelectedDate(
+      selectedDate.date = event.target.value,
+      selectedDate.day = dates[ new Date(selectedDate.year, selectedDate.month, selectedDate.date).getDay()],
+    );
+    console.log(selectedDate.date);
+    console.log(selectedDate.day);
+    
+  }
+  const handleSelectMonth = event => {
+    //setMonth(event.target.value);
+    //setDay(new Date(year, month, date).getDay());
+    setSelectedDate(
+      selectedDate.month = event.target.value,
+    );
+  }
+  const handleSelectYear = event => {
+    //setYear(event.target.value);
+    //setDay(new Date(year, month, date).getDay());
+    setSelectedDate(
+      selectedDate.year = event.target.value,
+    );
+  }
+
+  // const getDays = numberOfMonth => {
+  //   const result = [];
+  //   for (var i=0; i <= numberOfMonth; i++) {
+  //     result.push([i+1]);
+  //     console.log(result.length);
+      
+  //   }
+  //   return result;
+  // };
+
+  // const getDay = () => 
+  
+  return (
+    <div>
+      <p>{selectedDate.day}</p>
+      <form>
+        <select onChange={handleSelectDate} value={selectedDate.date}>
+          {dates.map((item, index) => <option value={index} key={index}>{item}</option>)}
+        </select>
+        <select onChange={handleSelectMonth} value={selectedDate.month}>
+          {months.map((item, index) => <option value={index} key={index}>{item}</option>)}
+        </select>
+        <select onChange={handleSelectYear}  value={selectedDate.year}>
+          {years.map((item, index) => <option value={index} key={index}>{item}</option>)}
+        </select>
+      </form>
     </div>
   );
 };
