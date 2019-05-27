@@ -7,6 +7,7 @@ import Lesson4 from './lessons/lesson4';
 import Lesson5 from './lessons/lesson5';
 import Lesson6 from './lessons/lesson6';
 import Lesson7 from './lessons/lesson7';
+import Lesson8 from './lessons/lesson8';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function BasicExample() {
         <div><Link to="/lesson5">Lesson5</Link></div>
         <div><Link to="/lesson6">Lesson6</Link></div>
         <div><Link to="/lesson7">Lesson7</Link></div>
+        <div><Link to="/lesson8">Lesson8</Link></div>
       </div>
       <Route path="/" component={home} />
       <Route path="/lesson1" component={lesson1} />
@@ -33,6 +35,7 @@ function BasicExample() {
       <Route path="/lesson5" component={lesson5} />
       <Route path="/lesson6" component={lesson6} />
       <Route path="/lesson7" component={lesson7} />
+      <Route path="/lesson8" component={lesson8} />
     </Router>
   );
 }
@@ -69,6 +72,11 @@ function lesson6() {
 function lesson7() {
   return (
     <Lesson7 />
+  );
+}
+function lesson8() {
+  return (
+    <Lesson8 />
   );
 }
 

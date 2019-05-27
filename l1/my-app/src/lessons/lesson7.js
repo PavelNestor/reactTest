@@ -8,7 +8,7 @@ export default function Lesson7() {
     <div style={{ textAlign: 'center' }}>
       <div style={{ border: '1px dotted grey' }}><h2 >Задачи для решения</h2></div>
       {[Lesson71, Lesson72, Lesson73, Lesson74, Lesson75, Lesson76, Lesson77, Lesson78,
-        Lesson79, Lesson710, Lesson711,].map((Comp, index) => {
+        Lesson79, Lesson710, Lesson711, Lesson712, Lesson713].map((Comp, index) => {
           return (
             <div key={index}><WriteHeader num={index} /><Comp /></div>
           );
@@ -175,7 +175,7 @@ const Lesson79 = () => {
         <option value={true}>отмечен</option>
         <option value={false}>не отмечен</option>
       </select>
-      <input type="checkbox" checked={value} />
+      <input type="checkbox" checked={value} readOnly={true} />
     </div>
   );
 };
@@ -222,6 +222,72 @@ const Lesson711 = () => {
           <input type="submit" value="add" />
         </form>
       </div>
+    </div>
+  );
+};
+
+const Lesson712 = () => {
+  const [input, setInput] = React.useState(false);
+  const handleCheck = () => setInput(!input);
+  return (
+    <div>
+      <input type="checkbox" onChange={handleCheck} />
+      <input type="submit" value="add" disabled={input} />
+    </div>
+  );
+};
+
+const Lesson713 = () => {
+  const [date, setDate] = React.useState(new Date());
+  const dates = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",];
+  const years = [
+    2019,
+    2018,
+    2017,
+    2016,
+    2015,
+    2014,
+    2013,];
+
+  const handleSelectDate = event => {
+    const newDate = {
+      'year': date.getFullYear(),
+      'month': date.getMonth(),
+      'day': date.getDate(),
+    };
+    newDate[event.target.name] = event.target.value;
+    setDate(
+      new Date(newDate.year, newDate.month, newDate.day)
+    );
+  }
+ 
+  return (
+    <div>
+      <p>{date.toLocaleString('eng', { weekday: 'long' })}</p>
+      <form>
+        <select onChange={handleSelectDate} defaultValue={date.getDate()} name='day' >
+          {dates.map((item, index) => <option value={index + 1} key={index}>{item}</option>)}
+        </select>
+        <select onChange={handleSelectDate} defaultValue={date.getMonth()} name='month'>
+          {months.map((item, index) => <option value={index} key={index}>{item}</option>)}
+        </select>
+        <select onChange={handleSelectDate} defaultValue={date.getFullYear()} name='year'>
+          {years.map((item, index) => <option value={item} key={index}>{item}</option>)}
+        </select>
+      </form>
     </div>
   );
 };
