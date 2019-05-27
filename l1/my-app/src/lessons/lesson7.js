@@ -238,23 +238,8 @@ const Lesson712 = () => {
 };
 
 const Lesson713 = () => {
-  var today = new Date();
-  const days = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',];
-  const [selectedDate, setSelectedDate] = React.useState({
-    date: today.getDate() + 1,
-    month: today.getMonth(),
-    year: today.getFullYear(),
-    day: days[today.getDay()],
-  });
-
-  const dates = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+  const [date, setDate] = React.useState(new Date());
+  const dates = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
   const months = [
     "January",
     "February",
@@ -277,62 +262,32 @@ const Lesson713 = () => {
     2014,
     2013,];
 
-  // const handleSelectDate = event => {
-  //   setSelectedDate(
-  //     selectedDate[event.target.name] = event.target.value,
-  //     console.log(event.target.name),
-  //     console.log(selectedDate.year),
-  //     console.log(selectedDate.month),
-  //     console.log(selectedDate.date),
-
-  //     today = new Date(selectedDate.year, selectedDate.month, selectedDate.date),
-  //     console.log('handle - ' + selectedDate.day),
-  //     console.log('handle - ' + days[today.getDay()]),
-  //   );
-  //   console.log(selectedDate);
-  // }
-
-  // return (
-  //   <div>
-  //     {console.log('return - ' + today)}
-  //     {/* {console.log('return - 2 ' + selectedDate.date)} */}
-
-  //     <p>{days[today.getDay()]}</p>
-  //     <form>
-  //       <select onChange={handleSelectDate} value={selectedDate.date} name='date' >
-  //         {dates.map((item, index) => <option value={index} key={index}>{item}</option>)}
-  //       </select>
-  //       <select onChange={handleSelectDate} defaultValue={selectedDate.month} name='month'>
-  //         {months.map((item, index) => <option value={index} key={index}>{item}</option>)}
-  //       </select>
-  //       <select onChange={handleSelectDate} defaultValue={selectedDate.year} name='year'>
-  //         {years.map((item, index) => <option value={index} key={index}>{item}</option>)}
-  //       </select>
-  //     </form>
-  //   </div>
-  // );
-  const [selectedDay, setSelectedDay] = React.useState(
-    {
-      date: 1,
-      month: 1,
-    }
-  );
   const handleSelectDate = event => {
-    setSelectedDay(selectedDate[event.target.name] = dates[event.target.value]);
-    console.log(dates[event.target.value]);
-    
+    const newDate = {
+      'year': date.getFullYear(),
+      'month': date.getMonth(),
+      'day': date.getDate(),
+    };
+    newDate[event.target.name] = event.target.value;
+    setDate(
+      new Date(newDate.year, newDate.month, newDate.day)
+    );
   }
+ 
   return (
     <div>
+      <p>{date.toLocaleString('eng', { weekday: 'long' })}</p>
       <form>
-        <select onChange={handleSelectDate} value={selectedDay.date} name='date' >
-          {dates.map((item, index) => <option value={index} key={index}>{item}</option>)}
+        <select onChange={handleSelectDate} defaultValue={date.getDate()} name='day' >
+          {dates.map((item, index) => <option value={index + 1} key={index}>{item}</option>)}
         </select>
-        <select onChange={handleSelectDate} value={selectedDay.month} name='month' >
-          {dates.map((item, index) => <option value={index} key={index}>{item}</option>)}
+        <select onChange={handleSelectDate} defaultValue={date.getMonth()} name='month'>
+          {months.map((item, index) => <option value={index} key={index}>{item}</option>)}
+        </select>
+        <select onChange={handleSelectDate} defaultValue={date.getFullYear()} name='year'>
+          {years.map((item, index) => <option value={item} key={index}>{item}</option>)}
         </select>
       </form>
-      <p>{selectedDay.date}</p>
     </div>
   );
 };
