@@ -534,8 +534,11 @@ const Lesson813 = () => {
     { name: 'ssss', surname: 'ttttt', salary: 400, genre: 'male' },
   ]);
   
-  
-  
+  const ITEMS_ON_PAGE = 10;
+
+  const paginate  = (array, items, offest) => {
+
+  }
 
   return (
     <div>
