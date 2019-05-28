@@ -31,7 +31,7 @@ const WriteHeader = (props) => {
 
 const Lesson71 = () => {
   const [value, setValue] = React.useState("text");
-  const changeValue = (event) => setValue(event.target.value);
+  const changeValue = event => setValue(event.target.value);
   return (
     <div>
       <p>{value}</p>
