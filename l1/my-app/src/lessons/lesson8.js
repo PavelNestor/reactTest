@@ -1,7 +1,6 @@
 import React from 'react';
 import json_data from './data/data8';
 
-
 export default function Lesson8() {
 
   return (
@@ -519,7 +518,7 @@ const Lesson812 = () => {
 };
 const Lesson813 = () => {
 
-  const [workers, setWorkers] = React.useState([
+  const workers = [
     { name: 'Коля', surname: 'Абрамов', salary: 1000, genre: 'male' },
     { name: 'Лена', surname: 'Васина', salary: 2000, genre: 'female' },
     { name: 'Петя', surname: 'Бильбо', salary: 3000, genre: 'male' },
@@ -532,18 +531,43 @@ const Lesson813 = () => {
     { name: 'jjjj', surname: 'lllll', salary: 20000, genre: 'female' },
     { name: 'qqqq', surname: 'rrrrr', salary: 31000, genre: 'male' },
     { name: 'ssss', surname: 'ttttt', salary: 400, genre: 'male' },
-  ]);
-  
-  const ITEMS_ON_PAGE = 10;
+  ];
 
-  const paginate  = (array, items, offest) => {
+  const [current, setCurrent] = React.useState(0);
 
+  const ITEMS_ON_PAGE = 5;
+
+  const paginate = (array, items, offset) => {
+    const from = offset * items;
+    console.log(from);
+    
+    const to = from + items
+    console.log(to);
+    
+    console.log(array.slice(from, to));
+    
+    return array.slice(from, to);
   }
+
+  const getLink = (array, items) => {
+    const countLink = Math.ceil(array.length / items);
+    const result = new Array(countLink).fill(null);
+    for (let i = 0; i < result.length; i++) {
+      result[i] = i;
+    }
+    return result;
+  }
+
+  const handleClick = index => setCurrent(index);
 
   return (
     <div>
+      {getLink(workers, ITEMS_ON_PAGE).map((index, item) => (
+        <span key={index} onClick={() => handleClick(index)}> {item+1} </span>)
+      )}
       <table style={{ border: '1px solid' }}>
         <caption>Workers</caption>
+
         <thead>
           <tr>
             <th>name</th>
@@ -553,14 +577,15 @@ const Lesson813 = () => {
           </tr>
         </thead>
         <tbody >
-          {workers.slice(0, 5).map((workers, index) =>
+          {paginate(workers, ITEMS_ON_PAGE, current).map((item, index) => (
             <tr key={index}>
-              <td>{workers.name}</td>
-              <td>{workers.surname}</td>
-              <td>{workers.salary}</td>
-              <td>{workers.genre}</td>
+              {console.log(item)}
+              <td>{item.name}</td>
+              <td>{item.surname}</td>
+              <td>{item.salary}</td>
+              <td>{item.genre}</td>
             </tr>
-          )}
+          ))}
         </tbody>
       </table>
     </div>

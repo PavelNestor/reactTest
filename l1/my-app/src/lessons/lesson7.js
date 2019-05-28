@@ -94,7 +94,7 @@ const Lesson75 = () => {
   return (
     <div>
       <p>{value}</p>
-      <select value={value} onChange={handleSelectChange}>
+      <select  onChange={handleSelectChange}>
         {arr.cities.map((city, index) => (
           <option key={index} value={index}>{city}</option>
         ))}

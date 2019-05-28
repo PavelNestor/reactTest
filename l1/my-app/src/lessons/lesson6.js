@@ -369,7 +369,7 @@ const Lesson612 = () => {
       <form onSubmit={handleSubmit}>
         <input type="text" onChange={handleName} />
         <input type="text" onChange={handleAge} />
-        <input type="submit" value="remove" />
+        <input type="submit" value="add" />
       </form>
     </div>
   )
