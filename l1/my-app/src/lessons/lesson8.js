@@ -1,13 +1,15 @@
 import React from 'react';
 import json_data from './data/data8';
+import styles from './styles.module.scss';
 
 export default function Lesson8() {
 
   return (
     <div style={{ textAlign: 'center' }}>
       <div style={{ border: '1px dotted grey' }}><h2 >Задачи для решения</h2></div>
-      {[Lesson81, Lesson82, Lesson83, Lesson84, Lesson85, Lesson86, Lesson87,
-        Lesson88, Lesson89, Lesson810, Lesson811, Lesson812, Lesson813].map((Comp, index) => {
+      {[Lesson81, Lesson82, Lesson83, Lesson84, Lesson85, Lesson86, Lesson87, Lesson88, Lesson89,
+        Lesson810, Lesson811, Lesson812, Lesson813, Lesson814, Lesson815,
+        Lesson816].map((Comp, index) => {
           return (
             <div key={index}><WriteHeader num={index} /><Comp /></div>
           );
@@ -516,6 +518,7 @@ const Lesson812 = () => {
     </div>
   )
 };
+
 const Lesson813 = () => {
 
   const workers = [
@@ -539,13 +542,8 @@ const Lesson813 = () => {
 
   const paginate = (array, items, offset) => {
     const from = offset * items;
-    console.log(from);
-    
     const to = from + items
-    console.log(to);
-    
-    console.log(array.slice(from, to));
-    
+
     return array.slice(from, to);
   }
 
@@ -561,9 +559,9 @@ const Lesson813 = () => {
   const handleClick = index => setCurrent(index);
 
   return (
-    <div>
+    <div style={{ margin: '30px' }}>
       {getLink(workers, ITEMS_ON_PAGE).map((index, item) => (
-        <span key={index} onClick={() => handleClick(index)}> {item+1} </span>)
+        <span key={index} onClick={() => handleClick(index)} style={{ cursor: 'pointer' }}> {item + 1} </span>)
       )}
       <table style={{ border: '1px solid' }}>
         <caption>Workers</caption>
@@ -579,7 +577,6 @@ const Lesson813 = () => {
         <tbody >
           {paginate(workers, ITEMS_ON_PAGE, current).map((item, index) => (
             <tr key={index}>
-              {console.log(item)}
               <td>{item.name}</td>
               <td>{item.surname}</td>
               <td>{item.salary}</td>
@@ -590,4 +587,139 @@ const Lesson813 = () => {
       </table>
     </div>
   )
+};
+
+const Lesson814 = () => {
+  const [cities, setCities] = React.useState([]);
+  const [city, setCity] = React.useState('');
+  const [show, setShow] = React.useState('');
+
+  const handleChange = event => setCity(event.target.value);
+  const nandleSubmit = () => setCities(cities.concat(city));
+  const handleSelect = event => setShow(event.target.value);
+
+  return (
+    <div style={{ margin: '30px' }}>
+      <select name='cities' style={{ margin: '30px' }} onChange={handleSelect}>
+        {cities.map((item, index) => (
+          <option key={index} value={item}>{item}</option>
+        ))}
+      </select>
+      <p>{show}</p>
+      <br />
+      <label htmlFor="addCity">Add sity</label>
+      <input type="text" name='addCity' onChange={handleChange} />
+      <button onClick={nandleSubmit}>add</button>
+    </div>
+  );
+};
+
+const Lesson815 = () => {
+  const [exchange, setExchange] = React.useState({
+    from: 'uah',
+    to: 'uah',
+  })
+  const [amount, setAmount] = React.useState();
+  const [result, setResult] = React.useState('');
+
+  const handleSelectFrom = event => setExchange({ from: event.target.value, to: exchange.to, });
+  const handleSelectTo = event => setExchange({ from: exchange.to, to: event.target.value, });
+
+  const handleSubmit = () => {
+    let result = 1;
+
+    if (exchange.from === 'uah' && exchange.to === 'usd') {
+      result = amount / 27;
+    } else if (exchange.from === 'usd' && exchange.to === 'uah') {
+      result = amount * 27;
+    } else {
+      result = amount;
+    }
+
+    setResult(result)
+  };
+
+  const handleChange = event => setAmount(event.target.value);
+
+  return (
+    <div style={{ margin: '30px' }}>
+      <select name='from' style={{ margin: '30px' }} defaultValue='uah' onChange={handleSelectFrom}>
+        <option value='uah'>uah</option>
+        <option value='usd'>usd</option>
+      </select>
+      <select name='to' style={{ margin: '30px' }} defaultValue='uah' onChange={handleSelectTo}>
+        <option value='usd'>usd</option>
+        <option value='uah'>uah</option>
+      </select>
+      <br />
+      <input type="text" name='addCity' onChange={handleChange} />
+      <button onClick={handleSubmit}>add</button>
+      <p>{result}</p>
+    </div>
+  );
+};
+
+const Lesson816 = () => {
+  const test = [
+    {
+      question: 'Вопрос 1',
+      answers: [
+        'Ответ1',
+        'Ответ2',
+        'Ответ3',
+        'Ответ4',
+        'Ответ5',
+      ],
+      right: 1, //номер правильного ответа
+    },
+    {
+      question: 'Вопрос 2',
+      answers: [
+        'Ответ1',
+        'Ответ2',
+        'Ответ3',
+        'Ответ4',
+        'Ответ5',
+      ],
+      right: 2, //номер правильного ответа
+    },
+    {
+      question: 'Вопрос 3',
+      answers: [
+        'Ответ1',
+        'Ответ2',
+        'Ответ3',
+        'Ответ4',
+        'Ответ5',
+      ],
+      right: 3, //номер правильного ответа
+    },
+  ]
+
+  const [answer, setAnswer] = React.useState({});
+
+  const handleChange = event => {
+    const value = event.target.value;
+    const name = event.target.name;
+    setAnswer(Object.assign({}, answer, {[name]: value === test[name].right - 1}));
+    console.log(answer);
+    
+  }
+
+  return (
+    <div className={styles.BorderRed}>
+      {test.map((item, index) => (
+        <div key={index}>
+          <p className={answer[index] === undefined ? styles.default : answer[index] ? styles.right : styles.wrong}>{item.question}</p>
+          {item.answers.map((element, innerIndex) => (
+            <div  key={innerIndex}>
+              <label htmlFor={`${item.question}_${innerIndex}`}>{element}</label>
+              <input type='radio' id={`${item.question}_${innerIndex}`} name={index} 
+              value={innerIndex} onChange={handleChange} />
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
 };
