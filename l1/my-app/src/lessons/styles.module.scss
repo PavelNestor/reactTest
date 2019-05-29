@@ -2,6 +2,19 @@
   border: 1px solid #a44;
 }
 
+.norm {
+  margin: 0;
+  padding: 0;
+}
+
+.AlignLeft {
+  text-align: left;
+}
+
+.AlignRight {
+  text-align: right;
+}
+
 .test {
   border: 1px solid #a44;
 }
@@ -16,4 +29,18 @@
 
 .default {
   color: #555;
+}
+
+//lesson 11 start
+.table {
+  border-collapse:collapse;
+}
+
+td, th{
+  padding:10px;
+  border:1px solid #cccccc;
+}
+
+th{
+  background-color:#C1D3FF;
 }

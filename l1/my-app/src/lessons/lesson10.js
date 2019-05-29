@@ -33,20 +33,20 @@ const Users = (props) => {
 
   return (
     <tr>
-      <td>Имя: {props.name}</td> 
-      <td>Фамилия: {props.surname}</td> 
-      <td>Возраст: {props.age}</td>
+      <td>{props.name}</td> 
+      <td>{props.surname}</td> 
+      <td>{props.age}</td>
     </tr>
   );
 };
 
 const Lesson101 = () => {
-  const [users, setUsers] = React.useState([
+  const [users] = React.useState([
     { name: 'Коля', surname: 'Колин', age: 20 },
     { name: 'Вася', surname: 'Васин', age: 30 },
     { name: 'Петя', surname: 'Петин', age: 35 },
     { name: 'Дима', surname: 'Димын', age: 25 },
-    { name: 'Дима', surname: 'Димын', age: 25 },
+    { name: 'Джони', surname: 'Волкер', age: 55 },
   ]);
 
   const view = users.map((item, index) => 
@@ -54,8 +54,17 @@ const Lesson101 = () => {
   
 
   return (
-    <table>
+    <table className={styles.table}>
+      <thead>
+      <tr >
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Возраст</th>
+          </tr>
+      </thead>
+      <tbody>
       {view}
+      </tbody>
     </table>
   )
 };
