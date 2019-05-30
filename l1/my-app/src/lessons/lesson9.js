@@ -1,6 +1,6 @@
 import React from 'react';
 import json_data from './data/data9';
-import styles from './styles.module.scss';
+
 
 export default function Lesson9() {
 
@@ -39,7 +39,7 @@ const Users = (props) => {
 };
 
 const Lesson91 = () => {
-  const [users, setUsers] = React.useState([
+  const [users] = React.useState([
     { name: 'Коля', surname: 'Колин', age: 20 },
     { name: 'Вася', surname: 'Васин', age: 30 },
     { name: 'Петя', surname: 'Петин', age: 35 },

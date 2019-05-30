@@ -1,6 +1,15 @@
 import React from 'react';
 import json_data from './data/data11';
 import styles from './styles.module.scss';
+import Task112 from './task112';
+import Task113 from './task113';
+import Task114 from './task114';
+import Task115 from './task115';
+import Task116 from './task116';
+import Task117 from './task117';
+import Task118 from './task118';
+import Task119 from './task119';
+import Task1110 from './task1110';
 
 export default function Lesson11() {
 
@@ -10,11 +19,12 @@ export default function Lesson11() {
                 <h2 >Практика по фреймворку React</h2>
                 <h3>Задачи для решения</h3>
             </div>
-            {[Lesson111].map((Comp, index) => {
-                return (
-                    <div key={index}><WriteHeader num={index} /><Comp /></div>
-                );
-            })}
+            {[Lesson111, Lesson112, Lesson113, Lesson114, Lesson115, Lesson116, Lesson117,
+                Lesson118, Lesson119, Lesson1110].map((Comp, index) => {
+                    return (
+                        <div key={index}><WriteHeader num={index} /><Comp /></div>
+                    );
+                })}
         </div >
     );
 };
@@ -34,29 +44,45 @@ const WriteHeader = (props) => {
 
 const Users = (props) => {
 
+    const [days, setDays] = React.useState(props.workDays);
+    const [rate, setRate] = React.useState(props.rate);
+
+    const handleChange = event => {
+        const value = +event.target.value;
+        const name = event.target.name;
+
+        props.onEdit(value, name, props.index)
+        if (name === 'days') {
+            return setDays(value)
+        }
+        return setRate(value);
+    };
+
     return (
         <tr>
             <td>{props.name}</td>
             <td>{props.surname}</td>
-            <td>{props.workDays}</td>
-            <td>{props.rate}</td>
-            <td>{props.rate * props.workDays}</td>
+            <td>
+                <input type="text" value={days} onChange={handleChange} name='days' className={styles.inTable} />
+            </td>
+            <td>
+                <input type="text" value={rate} onChange={handleChange} name='rate' className={styles.inTable} />
+            </td>
+            <td>{days * rate}</td>
         </tr>
     );
 };
 
 const Sum = (props) => {
-    console.log(props.array);
-    
     return (
         <h5 className={styles.norm}>ВСЕГО: {props.array.reduce((sum, current) => {
             return sum + current;
-          }, 0)}</h5>
+        }, 0)}</h5>
     );
-  };
+};
 
 const Lesson111 = () => {
-    const [users] = React.useState([
+    const [users, setUsers] = React.useState([
         { name: 'Коля', surname: 'Колин', workDays: 20, rate: 7 },
         { name: 'Вася', surname: 'Васин', workDays: 30, rate: 7 },
         { name: 'Петя', surname: 'Петин', workDays: 35, rate: 7 },
@@ -64,7 +90,16 @@ const Lesson111 = () => {
         { name: 'Джони', surname: 'Волкер', workDays: 55, rate: 7 },
     ]);
 
-    const [total, setTotal] = React.useState(1000);
+    const handleEdit = (value, name, index) => {
+        if (name === 'days') {
+            users[index].workDays = value;
+            setUsers(users.concat());
+        }
+        if (name === 'rate') {
+            users[index].rate = value;
+            setUsers(users.concat());
+        }
+    };
 
     const view = users.map((item, index) =>
         <Users
@@ -73,6 +108,8 @@ const Lesson111 = () => {
             surname={item.surname}
             workDays={item.workDays}
             rate={item.rate}
+            onEdit={handleEdit}
+            index={index}
         />);
 
     return (
@@ -92,10 +129,64 @@ const Lesson111 = () => {
             <tfoot>
                 <tr>
                     <td colSpan="5" className={styles.AlignRight}>
-                        <Sum  array={users.map(item => item.rate*item.workDays)}/>
+                        <Sum array={users.map(item => item.rate * item.workDays)} />
                     </td>
                 </tr>
             </tfoot>
         </table>
-    )
+    );
+};
+
+const Lesson112 = () => {
+    return (
+        <Task112 />
+    );
+};
+
+const Lesson113 = () => {
+    return (
+        <Task113 />
+    );
+};
+
+const Lesson114 = () => {
+    return (
+        <Task114 />
+    );
+};
+
+const Lesson115 = () => {
+    return (
+        <Task115 />
+    );
+};
+
+const Lesson116 = () => {
+    return (
+        <Task116 />
+    );
+};
+
+const Lesson117 = () => {
+    return (
+        <Task117 />
+    );
+};
+
+const Lesson118 = () => {
+    return (
+        <Task118 />
+    );
+};
+
+const Lesson119 = () => {
+    return (
+        <Task119 />
+    );
+};
+
+const Lesson1110 = () => {
+    return (
+        <Task1110 />
+    );
 };
