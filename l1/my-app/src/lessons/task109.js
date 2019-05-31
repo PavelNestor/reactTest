@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './styles.module.scss';
 
-export default function Task119() {
+export default function Task109() {
   const [products, setProducts] = React.useState([
     { name: 'огурец', price: 10, quantity: 20 },
     { name: 'помидор', price: 15, quantity: 30 },

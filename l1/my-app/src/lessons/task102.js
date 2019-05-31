@@ -1,13 +1,13 @@
 import React from 'react';
 import styles from './styles.module.scss';
 
-export default function Task115() {
+export default function Task102() {
   const [users, setUsers] = React.useState([
-    { name: 'Коля', surname: 'Колин', workDays: 20, rate: 7, link: 'del' },
-    { name: 'Вася', surname: 'Васин', workDays: 30, rate: 7, link: 'del' },
-    { name: 'Петя', surname: 'Петин', workDays: 35, rate: 7, link: 'del' },
-    { name: 'Дима', surname: 'Димын', workDays: 25, rate: 7, link: 'del' },
-    { name: 'Джони', surname: 'Волкер', workDays: 55, rate: 7, link: 'del' },
+    { name: 'Коля', surname: 'Колин', workDays: 20, rate: 7, link: 'link' },
+    { name: 'Вася', surname: 'Васин', workDays: 30, rate: 7, link: 'link' },
+    { name: 'Петя', surname: 'Петин', workDays: 35, rate: 7, link: 'link' },
+    { name: 'Дима', surname: 'Димын', workDays: 25, rate: 7, link: 'link' },
+    { name: 'Джони', surname: 'Волкер', workDays: 55, rate: 7, link: 'link' },
 ]);
 
 const handleEdit = (value, name, index) => {
@@ -21,10 +21,8 @@ const handleEdit = (value, name, index) => {
     };
   };
 
-  const showMessage = num => {
-    const newArr = users;
-    newArr.splice(num, 1);
-    setUsers(newArr.concat())
+  const showMessage = () => {
+    alert('!');
   };
 
 const view = users.map((item, index) =>
@@ -91,7 +89,7 @@ const Users = (props) => {
               <input type="text" value={rate} onChange={handleChange} name='rate' className={styles.inTable}/>
               </td>
           <td>{days * rate}</td>
-          <td><button onClick={() => props.onShowMessage(props.index)}>{props.link}</button></td>
+          <td><button onClick={props.onShowMessage}>{props.link}</button></td>
       </tr>
   );
 };

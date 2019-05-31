@@ -1,104 +1,80 @@
 import React from 'react';
 import styles from './styles.module.scss';
 
-export default function Task112() {
-  const [users, setUsers] = React.useState([
-    { name: 'Коля', surname: 'Колин', workDays: 20, rate: 7, link: 'link' },
-    { name: 'Вася', surname: 'Васин', workDays: 30, rate: 7, link: 'link' },
-    { name: 'Петя', surname: 'Петин', workDays: 35, rate: 7, link: 'link' },
-    { name: 'Дима', surname: 'Димын', workDays: 25, rate: 7, link: 'link' },
-    { name: 'Джони', surname: 'Волкер', workDays: 55, rate: 7, link: 'link' },
-]);
+export default function Task109() {
+    const [test, setTest] = React.useState([
+        {
+            question: 'сто одёжек и все без застёжек',
+            answer: 'капуста',
+            isAnswered: false,
+        },
+        {
+            question: 'висит груша нельзя скушать',
+            answer: 'лампочка',
+            isAnswered: false,
+        },
+        {
+            question: 'я от бабушки ушёл ...',
+            answer: 'колобок',
+            isAnswered: false,
+        },
+    ]);
 
-const handleEdit = (value, name, index) => {
-    if(name === 'days') {
-      users[index].workDays = value;
-      setUsers(users.concat());
-    };
-    if(name === 'rate') {
-      users[index].rate = value;
-      setUsers(users.concat());
-    };
-  };
+    const [answer, setAnswer] = React.useState({});
 
-  const showMessage = () => {
-    alert('!');
-  };
+    const handleChange = event => {
+        const value = event.target.value;
+        const name = event.target.name;
 
-const view = users.map((item, index) =>
-    <Users
-        key={index}
-        name={item.name}
-        surname={item.surname}
-        workDays={item.workDays}
-        rate={item.rate}
-        onEdit={handleEdit}
-        index={index}
-        onShowMessage={showMessage}
-        link={item.link}
-    />);
+        setAnswer(Object.assign({}, answer, { [name]: value }));
+    }
 
-return (
-    <table className={styles.table}>
-        <thead>
-            <tr >
-                <th>Имя</th>
-                <th>Фамилия</th>
-                <th>Дни</th>
-                <th>Ставка</th>
-                <th>Зарплата</th>
-                <th>link</th>
-            </tr>
-        </thead>
-        <tbody>
-            {view}
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colSpan="6" className={styles.AlignRight}>
-                    <Sum array={users.map(item => item.rate * item.workDays)} />
-                </td>
-            </tr>
-        </tfoot>
-    </table>
-);
-}
+    const handleClick = event => {
+        test[event.target.name].isAnswered = !test[event.target.name].isAnswered;
+        setTest(test.concat());
+    }
 
-
-const Users = (props) => {
-
-  const [days, setDays] = React.useState(props.workDays);
-  const [rate, setRate] = React.useState(props.rate);
-
-  const handleChange = event => {
-      const value = +event.target.value;
-      const name = event.target.name;
-      
-      props.onEdit(value, name, props.index)
-      name === 'days' ? setDays(value) : setRate(value);
-  };
-
-  return (
-      <tr>
-          <td>{props.name}</td>
-          <td>{props.surname}</td>
-          <td>
-              <input type="text" value={days} onChange={handleChange} name='days' className={styles.inTable}/>
-          </td>
-          <td>
-              <input type="text" value={rate} onChange={handleChange} name='rate' className={styles.inTable}/>
-              </td>
-          <td>{days * rate}</td>
-          <td><button onClick={props.onShowMessage}>{props.link}</button></td>
-      </tr>
-  );
+    return (
+        <div className={styles.BorderRed}>
+            {test.map((item, index) => (
+                <div key={index}>
+                    <p>{item.question}</p>
+                    {console.log(answer[index] == test[index])}
+                   { item.isAnswered
+                        ?
+                        <After 
+                            text={answer[index]}
+                            isRight={answer[index] === item.answer}
+                            answer={item.answer}
+                        />
+                        :
+                        <Before 
+                            index={index}
+                            onHandleChange={handleChange}
+                            onHandleClick={handleClick}
+                        /> 
+                        }
+                </div>
+            ))}
+        </div>
+    );
 };
 
-const Sum = (props) => {
-  return (
-      <h5 className={styles.norm}>ВСЕГО: {props.array.reduce((sum, current) => {
-          return sum + current;
-      }, 0)}</h5>
-  );
+const Before = props => {
+    return (
+        <div>
+            <input type="text" name={props.index} onChange={props.onHandleChange} />
+            <button onClick={props.onHandleClick} name={props.index}>сдать тест</button>
+        </div>
+    );
 };
+
+const After = props => {
+    return (
+        <p className={props.isRight ? styles.right : styles.wrong}>
+            ваш ответ {props.text}, {props.isRight ? 'правильно!' : 'неправильно! Правильный ответ  ' + props.answer + '!'}
+        </p>
+    );
+};
+
 

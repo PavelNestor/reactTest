@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './styles.module.scss';
 
-export default function Task114() {
+export default function Task103() {
   const [users, setUsers] = React.useState([
     { name: 'Коля', surname: 'Колин', workDays: 20, rate: 7, link: 'link' },
     { name: 'Вася', surname: 'Васин', workDays: 30, rate: 7, link: 'link' },
@@ -21,8 +21,8 @@ const handleEdit = (value, name, index) => {
     };
   };
 
-  const showMessage = num => {
-    alert(num);
+  const showMessage = string => {
+    alert(string);
   };
 
 const view = users.map((item, index) =>
@@ -89,12 +89,13 @@ const Users = (props) => {
               <input type="text" value={rate} onChange={handleChange} name='rate' className={styles.inTable}/>
               </td>
           <td>{days * rate}</td>
-          <td><button onClick={() => props.onShowMessage(props.index)}>{props.link}</button></td>
+          <td><button onClick={() => props.onShowMessage(props.name)}>{props.link}</button></td>
       </tr>
   );
 };
 
 const Sum = (props) => {
+  
   return (
       <h5 className={styles.norm}>ВСЕГО: {props.array.reduce((sum, current) => {
           return sum + current;

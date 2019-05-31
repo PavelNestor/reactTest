@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './styles.module.scss';
 
-export default function Task116() {
+export default function Task106() {
     const [users, setUsers] = React.useState([
         { name: 'Коля', link: 'edit' },
         { name: 'Вася', link: 'edit' },

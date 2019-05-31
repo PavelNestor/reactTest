@@ -699,11 +699,10 @@ const Lesson816 = () => {
   const [answer, setAnswer] = React.useState({});
 
   const handleChange = event => {
-    const value = event.target.value;
+    const value = +event.target.value;
     const name = event.target.name;
-    setAnswer(Object.assign({}, answer, {[name]: value === test[name].right - 1}));
-    console.log(answer);
     
+    setAnswer(Object.assign({}, answer, {[name]: value === test[name].right - 1}));
   }
 
   return (

@@ -1,35 +1,23 @@
 import React from 'react';
 import styles from './styles.module.scss';
 
-export default function Task1110() {
+export default function Task108() {
   const [products, setProducts] = React.useState([
-    { name: 'огурец', price: 10, quantity: 20, checked: true },
-    { name: 'помидор', price: 15, quantity: 30, checked: true },
-    { name: 'сыр', price: 20, quantity: 35, checked: true },
-    { name: 'колбаса', price: 25, quantity: 25, checked: true },
-    { name: 'молоко', price: 30, quantity: 55, checked: true },
+    { name: 'огурец', price: 10, quantity: 20 },
+    { name: 'помидор', price: 15, quantity: 30 },
+    { name: 'сыр', price: 20, quantity: 35 },
+    { name: 'колбаса', price: 25, quantity: 25 },
+    { name: 'молоко', price: 30, quantity: 55 },
   ]);
 
   const handleClick = num => {
     const newArr = products;
-  
     newArr.splice(num, 1);
     setProducts(newArr.concat())
   };
 
   const handleClickAdd = newProduct => {
     setProducts(products.concat(newProduct))
-  };
-
-  const handleChecked = index => {
-    // const obj = { checked: !products[index].checked };
-    // products[index] = Object.assign({}, products[index], obj);
-    // const newArr = products;
-    // setProducts();
-    // console.log(products);
-
-    products[index].checked = !products[index].checked;
-    setProducts(products.concat());
   };
 
   const view = products.map((item, index) =>
@@ -40,8 +28,6 @@ export default function Task1110() {
       quantity={item.quantity}
       index={index}
       onHandleClick={handleClick}
-      checked={item.checked}
-      onHandleChecked={handleChecked}
     />);
 
   return (
@@ -52,8 +38,7 @@ export default function Task1110() {
           <th>Цена</th>
           <th>Количество</th>
           <th>Стоимость</th>
-          <th>Check</th>
-          <th>Del</th>
+          <th>Удалить</th>
         </tr>
       </thead>
       <tbody>
@@ -61,13 +46,6 @@ export default function Task1110() {
           onHandleClickAdd={handleClickAdd} />
         {view}
       </tbody>
-      <tfoot>
-        <tr>
-          <td colSpan="5" className={styles.AlignRight}>
-            <Sum array={products.map(item => item.checked ? item.price * item.quantity : 0)} />
-          </td>
-        </tr>
-      </tfoot>
     </table>
   );
 }
@@ -81,8 +59,6 @@ const Product = (props) => {
       <td>{props.price}</td>
       <td>{props.quantity}</td>
       <td>{props.price * props.quantity}</td>
-      <td><input type="checkbox" name={props.index} checked={props.checked}
-        onChange={() => props.onHandleChecked(props.index)} /></td>
       <td><button onClick={() => props.onHandleClick(props.index)}>del</button></td>
     </tr>
   );
@@ -114,18 +90,8 @@ const AddProduct = (props) => {
       <td><input type="text" name='price' onChange={handleChange} /></td>
       <td><input type="text" name='quantity' onChange={handleChange} /></td>
       <td></td>
-      <td></td>
       <td><button onClick={() => props.onHandleClickAdd(product)}>add</button></td>
     </tr>
-  );
-};
-
-
-const Sum = (props) => {
-  return (
-    <h5 className={styles.norm}>ВСЕГО: {props.array.reduce((sum, current) => {
-      return sum + current;
-    }, 0)}</h5>
   );
 };
 
