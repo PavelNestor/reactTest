@@ -6,33 +6,44 @@ export default function Task109() {
         {
             question: 'сто одёжек и все без застёжек',
             answer: 'капуста',
-            isAnswered: false,
+            userAnswer: '',
         },
         {
             question: 'висит груша нельзя скушать',
             answer: 'лампочка',
-            isAnswered: false,
+            userAnswer: '',
         },
         {
             question: 'я от бабушки ушёл ...',
             answer: 'колобок',
-            isAnswered: false,
+            userAnswer: '',
         },
     ]);
 
-    const [answer, setAnswer] = React.useState({});
+    const [answer, setAnswer] = React.useState();
     const [point, setPoint] = React.useState(0);
     const [isFinish, setIsFinish] = React.useState(false);
 
     const handleChange = event => {
         const value = event.target.value;
-        const name = event.target.name;
-
-        setAnswer(Object.assign({}, answer, { [name]: value }));
-    }
+        const name = +event.target.name;
+        
+        console.log('Change-name: ', name);
+        console.log('Change-value: ', value);
+        
+        setAnswer(value);
+        
+    };
 
     const handleClick = event => {
         const name = event.target.name;
+        let newArr = test;
+        newArr[point].userAnswer = answer;
+        console.log('newArr', newArr);
+        
+        setTest(newArr);
+        console.log('click-test', test);
+        
         if (name === 'next') {
             let newPoint = point + 1;
             if (newPoint >= test.length) {
@@ -48,13 +59,18 @@ export default function Task109() {
         } else {
             setIsFinish(!isFinish)
         }
-        setAnswer();
+        console.log('Click- answer: ', answer);
+        console.log('Click- point: ', point);
+        
+        setAnswer(answer);
     };
 
     return (
         <div className={styles.BorderRed}>
             {isFinish ?
-                <After />
+                <After 
+                    arr={test}
+                    />
                 :
                 <Quastion
                     index={point}
@@ -73,7 +89,7 @@ const Quastion = props => {
     return (
         <div>
             <p>{props.question}</p>
-            <input type="text" name={props.index} onChange={props.onHandleChange} />
+            <input type="text" name={props.index} defaultValue='' onChange={props.onHandleChange} />
             <br />
             <button onClick={props.onHandleClick} name='prev'
                 className={props.index === 0 ? styles.displayNone : styles.displayInline}>prev</button>
@@ -87,9 +103,14 @@ const Quastion = props => {
 
 const After = props => {
     return (
-        <p className={props.isRight ? styles.right : styles.wrong}>
-            ваш ответ {props.text}, {props.isRight ? 'правильно!' : 'неправильно! Правильный ответ  ' + props.answer + '!'}
-        </p>
+        <div>
+            {props.arr.map((item, index) => (
+                <p key={index} className={item.userAnswer === item.answer ? styles.right : styles.wrong}>
+                ваш ответ {item.userAnswer},
+                {item.userAnswer === item.answer  ? 'правильно!' : 'неправильно! Правильный ответ  ' + item.answer + '!'}
+            </p>
+            ))}
+        </div>
     );
 };
 
