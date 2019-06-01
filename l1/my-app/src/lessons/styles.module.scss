@@ -67,6 +67,10 @@ th{
   display: inline;
 }
 
+.displayNone {
+  display: none;
+}
+
 .rounded {
   width: 200px;
   margin: 10px auto;
@@ -112,3 +116,4 @@ transition: all .3s ease-out;
     background: rgba(97, 85, 73, .5);
   }
 }
+

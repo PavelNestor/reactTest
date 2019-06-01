@@ -21,6 +21,8 @@ export default function Task109() {
     ]);
 
     const [answer, setAnswer] = React.useState({});
+    const [point, setPoint] = React.useState(0);
+    const [isFinish, setIsFinish] = React.useState(false);
 
     const handleChange = event => {
         const value = event.target.value;
@@ -30,41 +32,55 @@ export default function Task109() {
     }
 
     const handleClick = event => {
-        test[event.target.name].isAnswered = !test[event.target.name].isAnswered;
-        setTest(test.concat());
-    }
+        const name = event.target.name;
+        if (name === 'next') {
+            let newPoint = point + 1;
+            if (newPoint >= test.length) {
+                newPoint = test.length - 1;
+            }
+            setPoint(newPoint);
+        } else if (name === 'prev') {
+            let newPoint = point - 1;
+            if (newPoint <= 0) {
+                newPoint = 0;
+            }
+            setPoint(newPoint);
+        } else {
+            setIsFinish(!isFinish)
+        }
+        setAnswer();
+    };
 
     return (
         <div className={styles.BorderRed}>
-            {test.map((item, index) => (
-                <div key={index}>
-                    <p>{item.question}</p>
-                    {console.log(answer[index] == test[index])}
-                   { item.isAnswered
-                        ?
-                        <After 
-                            text={answer[index]}
-                            isRight={answer[index] === item.answer}
-                            answer={item.answer}
-                        />
-                        :
-                        <Before 
-                            index={index}
-                            onHandleChange={handleChange}
-                            onHandleClick={handleClick}
-                        /> 
-                        }
-                </div>
-            ))}
+            {isFinish ?
+                <After />
+                :
+                <Quastion
+                    index={point}
+                    question={test[point].question}
+                    onHandleChange={handleChange}
+                    onHandleClick={handleClick}
+                    last={test.length - 1}
+                />
+            }
+
         </div>
     );
 };
 
-const Before = props => {
+const Quastion = props => {
     return (
         <div>
+            <p>{props.question}</p>
             <input type="text" name={props.index} onChange={props.onHandleChange} />
-            <button onClick={props.onHandleClick} name={props.index}>сдать тест</button>
+            <br />
+            <button onClick={props.onHandleClick} name='prev'
+                className={props.index === 0 ? styles.displayNone : styles.displayInline}>prev</button>
+            <button onClick={props.onHandleClick} name='next'
+                className={props.index === props.last ? styles.displayNone : styles.displayInline}>next</button>
+            <button onClick={props.onHandleClick} name='check'
+                className={props.index === props.last ? styles.displayInline : styles.displayNone}>check</button>
         </div>
     );
 };
