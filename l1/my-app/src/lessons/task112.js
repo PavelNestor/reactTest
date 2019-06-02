@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './styles.module.scss';
 
-export default function Task109() {
+export default function Task112() {
     const [test, setTest] = React.useState([
         {
             question: 'сто одёжек и все без застёжек',
@@ -39,7 +39,6 @@ export default function Task109() {
             {test.map((item, index) => (
                 <div key={index}>
                     <p>{item.question}</p>
-                    {console.log(answer[index] == test[index])}
                    { item.isAnswered
                         ?
                         <After 

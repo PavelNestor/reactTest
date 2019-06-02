@@ -3,6 +3,10 @@ import json_data from './data/data11';
 import styles from './styles.module.scss';
 import Task112 from './task112';
 import Task113 from './task113';
+import Task114 from './task114';
+import Task115 from './task115';
+import Task116 from './task116';
+import Task117 from './task117';
 
 
 export default function Lesson11() {
@@ -13,7 +17,7 @@ export default function Lesson11() {
                 <h2 >Практика по фреймворку React</h2>
                 <h3>Задачи для решения</h3>
             </div>
-            {[Lesson111, Lesson112, Lesson113].map((Comp, index) => {
+            {[Lesson111, Lesson112, Lesson113, Lesson114, Lesson115, Lesson116, Lesson117].map((Comp, index) => {
                     return (
                         <div key={index}><WriteHeader num={index} /><Comp /></div>
                     );
@@ -140,5 +144,29 @@ const Lesson112 = () => {
 const Lesson113 = () => {
     return (
         <Task113 />
+    );
+};
+
+const Lesson114 = () => {
+    return (
+        <Task114 />
+    );
+};
+
+const Lesson115 = () => {
+    return (
+        <Task115 />
+    );
+};
+
+const Lesson116 = () => {
+    return (
+        <Task116 />
+    );
+};
+
+const Lesson117 = () => {
+    return (
+        <Task117 />
     );
 };
