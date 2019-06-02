@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import styles from './styles.module.scss';
 
 export default function Task117() {
@@ -38,23 +37,23 @@ export default function Task117() {
 
   return (
     <div className={styles.dFlex}>
-      <Calendar 
+      <Calendar
         date={date}
       />
       <table className={styles.table}>
-      <thead>
-        <tr >
-          <th>Задача</th>
-          <th>Is Done?</th>
-          <th>Remove</th>
-        </tr>
-      </thead>
-      <tbody>
-        <AddTask
-          onHandleAdd={handleAdd} />
-        {view}
-      </tbody>
-    </table>
+        <thead>
+          <tr >
+            <th>Задача</th>
+            <th>Is Done?</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          <AddTask
+            onHandleAdd={handleAdd} />
+          {view}
+        </tbody>
+      </table>
     </div>
   );
 }
@@ -88,7 +87,7 @@ const AddTask = props => {
       <td colSpan={3}>
         <form onSubmit={(event) => props.onHandleAdd(event, task)}>
           <input type='text' name='name' onChange={handleChange} />
-          <input type='submit' value='add'/>
+          <input type='submit' value='add' />
         </form>
       </td>
     </tr>
@@ -98,27 +97,27 @@ const AddTask = props => {
 
 // Component Calendar -- START --
 const Calendar = props => {
-  const [date, setDate] = React.useState(props.date);
-  
+  const date = props.date;
+
   const nav = (
     <tr>
-          <th>
-            <button>{'<<'}</button>
-          </th>
-          <th colSpan={5}>
-            <span className='month'>{date.toLocaleDateString("en-US", {month: 'long'})}</span>
-            <span className='year'>{date.toLocaleDateString("en-US", {year: 'numeric'})}</span>
-          </th>
-          <th>
-            <button>{'>>'}</button>
-          </th>
+      <th>
+        <button>{'<<'}</button>
+      </th>
+      <th colSpan={5}>
+        <span className='month'>{date.toLocaleDateString("en-US", { month: 'long' })}</span>
+        <span className='year'>{date.toLocaleDateString("en-US", { year: 'numeric' })}</span>
+      </th>
+      <th>
+        <button>{'>>'}</button>
+      </th>
     </tr>
   );
 
   const getMonday = date => {
     date = new Date(date);
     var day = date.getDay(),
-        diff = date.getDate() - day + (day === 0 ? -6:1);
+      diff = date.getDate() - day + (day === 0 ? -6 : 1);
     return new Date(date.setDate(diff));
   };
 
@@ -126,60 +125,20 @@ const Calendar = props => {
     let days = [];
     let monday = getMonday(date);
     for (let index = 0; index < 7; index++) {
-      days.push(monday.toLocaleDateString('en-US', {weekday: 'short'}));
-      monday = new Date(monday.valueOf()+24*60*60*1000);
+      days.push(monday.toLocaleDateString('en-US', { weekday: 'short' }));
+      monday = new Date(monday.valueOf() + 24 * 60 * 60 * 1000);
     }
     return days;
   };
 
-    const daysOfWeek = (
-      <tr>
-        {getDaysOfWeek().map((item, index) => (
-          <th key={index}>{item}</th>
-        ))}
-      </tr>
-    );
+  const daysOfWeek = (
+    <tr>
+      {getDaysOfWeek().map((item, index) => (
+        <th key={index}>{item}</th>
+      ))}
+    </tr>
+  );
 
-    function getLastDayOfMonth(date) {
-      let newDate = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-      return newDate.getDate();
-    }
-
-    const createCalendar = event => {
-      let year = date.getFullYear();
-      let month = date.getMonth();
-      let d = new Date(year, month);
-      let table = '<tr>';
-
-      for (let i = 0; i < getDay(d); i++) {
-        table += '<td></td>';
-      }
-
-      while (d.getMonth() === month) {
-        table += '<td>' + d.getDate() + '</td>';
-
-        if (getDay(d) %7 === 6) {
-          table += '</tr><tr>';
-        }
-
-        d.setDate(d.getDate() + 1);
-      };
-
-      if (getDay(d) !== 0) {
-        for (let i = getDay(d); i < 7; i++) {
-          table += '<td></td>';
-        }
-      }
-      console.log(table);
-      table += '</tr>';
-
-    };
-
-    function getDay(date) {
-      var day = date.getDay();
-      if (day === 0) day = 7;
-      return day - 1;
-    };
 
   return (
     <table>
@@ -189,10 +148,95 @@ const Calendar = props => {
       <thead>
         {daysOfWeek}
       </thead>
-      <tbody id='tbody'>
-        {createCalendar}
-      </tbody>
+
+      <CreateCalendar
+        date={date}
+      />
+
     </table>
   );
 }
 // Component Calendar -- END --
+
+
+const getDaysOfMonth = (date) => {
+  let result = [];
+  let newDate = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+  const lastDate = newDate.getDate();
+
+  for (let i = 0; i < lastDate; i++) {
+    result.push(i);
+  }
+  return result;
+};
+
+// Component Calendar -- START --
+const CreateCalendar = props => {
+  const date = props.date;
+  let year = date.getFullYear();
+  let month = date.getMonth();
+  let d = new Date(year, month);
+  const deysBefore = getDay(d);
+  const deysAfter = 5 - getDay(d);
+
+  const fillDaysArr = () => {
+    let result = [];
+    for (let i = 0; i < deysBefore; i++) {
+      result.push('');
+    }
+
+    for (let i = 0; i < getDaysOfMonth(date).length; i++) {
+      result.push(i + 1);
+    };
+
+    for (let i = 0; i < deysAfter; i++) {
+      result.push('');
+    };
+    return result;
+  };
+
+  const arrRow = () => {
+    const count = Math.ceil(fillDaysArr().length / 7);
+    let result = new Array(count);
+    const shift = 7;
+
+    for (let i = 0; i < count; i++) {
+      let start = shift * i;
+      let end = shift + start;
+      result.push(fillDaysArr().slice(start, end));
+    };
+
+    return result;
+  };
+
+  return (
+    <tbody>
+      {arrRow().map((item, index) => (
+        <TableRow
+          key={index}
+          row={item}
+        />
+      ))}
+    </tbody>
+  );
+};
+// Component Calendar -- END --
+
+function getDay(date) {
+  var day = date.getDay();
+  if (day === 0) day = 7;
+  return day - 1;
+};
+// Component Calendar -- END --
+
+// Component TAbleRow -- START --
+const TableRow = props => {
+  return (
+    <tr>
+      {props.row.map((item, index) => (
+        <td key={index}>{item}</td>
+      ))}
+    </tr>
+  );
+};
+// Component TAbleRow -- END --
