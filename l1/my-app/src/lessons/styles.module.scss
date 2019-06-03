@@ -129,3 +129,60 @@ transition: all .3s ease-out;
   display: flex;
 }
 
+.today {
+  background: #C1D3FF;
+}
+.cursorPointer {
+  cursor: pointer;
+}
+
+// 11.8 Tic Tac Toe ----- START -----
+
+.ticTac {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+.boardRow:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.status {
+  margin-bottom: 10px;
+}
+
+.btnSquare {
+  background: #fff;
+  border: 1px solid #999;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 34px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 34px;
+}
+
+.btnSquare:focus {
+  outline: none;
+}
+
+.kbd-navigation .square:focus {
+  background: #ddd;
+}
+
+.game {
+  display: flex;
+  flex-direction: row;
+}
+
+.gameInfo {
+  margin-left: 20px;
+}
+
+// 11.8 Tic Tac Toe ----- END -----

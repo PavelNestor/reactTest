@@ -7,6 +7,7 @@ import Task114 from './task114';
 import Task115 from './task115';
 import Task116 from './task116';
 import Task117 from './task117';
+import Task118 from './task118';
 
 
 export default function Lesson11() {
@@ -17,7 +18,8 @@ export default function Lesson11() {
                 <h2 >Практика по фреймворку React</h2>
                 <h3>Задачи для решения</h3>
             </div>
-            {[Lesson111, Lesson112, Lesson113, Lesson114, Lesson115, Lesson116, Lesson117].map((Comp, index) => {
+            {[Lesson111, Lesson112, Lesson113, Lesson114, Lesson115, Lesson116, Lesson117,
+                Lesson118].map((Comp, index) => {
                     return (
                         <div key={index}><WriteHeader num={index} /><Comp /></div>
                     );
@@ -168,5 +170,11 @@ const Lesson116 = () => {
 const Lesson117 = () => {
     return (
         <Task117 />
+    );
+};
+
+const Lesson118 = () => {
+    return (
+        <Task118 />
     );
 };
