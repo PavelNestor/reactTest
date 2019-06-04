@@ -61,7 +61,7 @@ export default function Task117() {
     if (event) {
       event.preventDefault();
       event.target.reset();
-    }
+    };
   };
 
   const handleChecked = index => {
@@ -227,7 +227,6 @@ const Calendar = props => {
     </tr>
   );
 
-
   return (
     <table className={styles.table}>
       <thead>
@@ -240,12 +239,10 @@ const Calendar = props => {
         date={date}
         onHandleDatePicker={props.onHandleDatePicker}
       />
-
     </table>
   );
 }
 // Component Calendar -- END --
-
 
 const getDaysOfMonth = (date) => {
   let result = [];
