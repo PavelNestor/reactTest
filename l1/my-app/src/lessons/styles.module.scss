@@ -186,3 +186,32 @@ transition: all .3s ease-out;
 }
 
 // 11.8 Tic Tac Toe ----- END -----
+
+.battleTable {
+  border-collapse:collapse;
+  padding:0;
+  margin: 40px;
+  border:none;
+
+
+  button {
+    width: 33px;
+    height: 33px;
+  }
+
+  .cellGreen{
+    background: #0f0;
+  }
+  .cellRed{
+    background: #a44;
+  }
+  .cellBlue{
+    background: #C1D3FF;
+  }
+
+  td, th, tr {
+    padding:0;
+    margin: 0;
+    border:none;
+  }
+}
