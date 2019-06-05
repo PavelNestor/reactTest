@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './../styles.module.scss';
 import attackStrategy from './atackStratgy';
+import generetShips from './generetShips';
 
 
 export default function Task119() {
@@ -42,11 +43,29 @@ const Square = props => {
 };
 
 const Board = props => {
-  const ships = props.ships;
-
+  let arr = props.ships;
+  const ships = () => {
+    let result = new Array(10).fill(alert());
+    
+    for (let key in arr) {
+      for (let index = 0; index < arr[key].coord.length; index++) {
+        const tempCoord = arr[key].coord[index];
+        const [y, x]= tempCoord;
+        console.log('Y: ', y);
+        console.log('X: ', x);
+        result[y][x] = 1;
+        console.log('result: ', result);
+        debugger;
+      }
+    }
+    return result;
+  }
+  if (!props.flag) {
+    arr = ships();
+  }
   return (
     <tbody>
-      {ships.map((itemRow, indexRow) => (
+      {arr.map((itemRow, indexRow) => (
         <tr key={indexRow}>
           {itemRow.map((itemCol, indexCol) => (
             <td key={`${indexRow} + ${indexCol}`}>
@@ -68,18 +87,9 @@ const Board = props => {
 // 2 - my hurt
 // 3 - my slip
 const Game = () => {
-  const [myShips, setMyShips] = React.useState([
-    [0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
-    [0, 1, 0, 0, 1, 1, 0, 0, 0, 0],
-    [0, 1, 0, 0, 0, 0, 0, 0, 1, 0],
-    [0, 1, 0, 0, 0, 1, 0, 0, 0, 0],
-    [0, 1, 0, 0, 0, 1, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [1, 0, 0, 1, 0, 0, 0, 1, 0, 0],
-    [1, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-    [1, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-  ]);
+  const [myShips, setMyShips] = React.useState(
+    generetShips()
+  );
 
   const [enemyShips, setEnemyShips] = React.useState([
     [0, 0, 0, 0, 0, 0, 1, 1, 0, 0],
@@ -121,23 +131,23 @@ const Game = () => {
     <div className={styles.dFlex}>
       <table className={styles.battleTable}>
         <Board
-          ships={myShips}
-          flag={false}
+          ships={enemyShips}
+          onClick={handleClick}
+          flag={true}
         />
       </table>
       <table className={styles.battleTable}>
         <Board
-          ships={enemyShips}
-          onClick={handleClick}
-          flag={true}
+          ships={myShips}
+          flag={false}
         />
       </table>
     </div>
   );
 };
 
-function fillMatrix (y, x) {
-  for (let index = y - 1; index <= y + 1; index++){
+function fillMatrix(y, x) {
+  for (let index = y - 1; index <= y + 1; index++) {
     for (let innerIndex = x - 1; innerIndex <= x + 1; innerIndex++) {
       if (matrix[index][innerIndex] = 0) {
         continue;
@@ -182,12 +192,6 @@ function enemyAtack(array) {
     }
   };
   return newArr;
-};
-
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
 export function find(array, value) {
