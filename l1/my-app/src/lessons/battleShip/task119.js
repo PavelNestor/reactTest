@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './../styles.module.scss';
 import attackStrategy from './atackStratgy';
-import generetShips from './generetShips';
+import generetShips, {createInitialArray}  from './generetShips';
 
 
 export default function Task119() {
@@ -44,25 +44,8 @@ const Square = props => {
 
 const Board = props => {
   let arr = props.ships;
-  const ships = () => {
-    let result = new Array(10).fill(alert());
-    
-    for (let key in arr) {
-      for (let index = 0; index < arr[key].coord.length; index++) {
-        const tempCoord = arr[key].coord[index];
-        const [y, x]= tempCoord;
-        console.log('Y: ', y);
-        console.log('X: ', x);
-        result[y][x] = 1;
-        console.log('result: ', result);
-        debugger;
-      }
-    }
-    return result;
-  }
-  if (!props.flag) {
-    arr = ships();
-  }
+  
+  
   return (
     <tbody>
       {arr.map((itemRow, indexRow) => (
@@ -87,8 +70,20 @@ const Board = props => {
 // 2 - my hurt
 // 3 - my slip
 const Game = () => {
+  const ships = arr => {
+    let result = createInitialArray();
+    
+    for (let key in arr) {
+      for (let index = 0; index < arr[key].coord.length; index++) {
+        const [y, x] = arr[key].coord[index];
+        result[y][x] = 1;
+      }
+    }
+    
+    return result;
+  }
   const [myShips, setMyShips] = React.useState(
-    generetShips()
+    ships(generetShips())
   );
 
   const [enemyShips, setEnemyShips] = React.useState([
@@ -107,7 +102,6 @@ const Game = () => {
 
   const handleClick = index => {
     const coord = index.split(' ');
-
     const newEnemyShips = enemyShips.slice();
     let cell = newEnemyShips[coord[0]][coord[1]];
     if (cell === 0) {
@@ -119,7 +113,7 @@ const Game = () => {
     newEnemyShips[coord[0]][coord[1]] = cell;
     setEnemyShips(newEnemyShips);
 
-    if (!checkForShips(myShips, 1)) {
+    if (checkForShips(myShips, 1)) {
       alert('You LOSE!');
     };
     if (!checkForShips(enemyShips, 1)) {
@@ -149,7 +143,7 @@ const Game = () => {
 function fillMatrix(y, x) {
   for (let index = y - 1; index <= y + 1; index++) {
     for (let innerIndex = x - 1; innerIndex <= x + 1; innerIndex++) {
-      if (matrix[index][innerIndex] = 0) {
+      if (matrix[index][innerIndex] === 0) {
         continue;
       } else {
         matrix[index][innerIndex] += matrix[index][innerIndex];
@@ -172,22 +166,25 @@ const matrix = [
 ];
 
 function enemyAtack(array) {
-
   const newArr = array.slice();
-
+  
   while (true) {
     const variant = attackStrategy(matrix);
     const y = variant[0];
     const x = variant[1];
     const field = newArr[y][x];
+
     if (field === 0) {
       newArr[y][x] = 3;
       matrix[y][x] = 0;
       break;
-    } else if (field === 1) {
+    }
+    if (field === 1) {
       newArr[y][x] = 2;
       fillMatrix(y, x);
-    } else if (field === 3 || field === 2) {
+    }
+    if (field === 3 || field === 2) {
+      matrix[y][x] = 0;
       continue;
     }
   };
@@ -204,6 +201,7 @@ export function checkForShips(array, value) {
   for (let index = 0; index < array.length; index++) {
     result = result.concat(array[index]);
   };
+  
   const i = result.indexOf(value);
   return i === -1 ? null : i;
 };

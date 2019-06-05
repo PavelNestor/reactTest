@@ -1,6 +1,4 @@
 export default function (matrix) {
-  console.log(matrix);
-  
   let result = 0;
   let newX = 0;
   let newY = 0;
