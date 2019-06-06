@@ -82,8 +82,35 @@ const Game = () => {
     
     return result;
   }
+  const startMyShip = generetShips();
+  // console.log(startMyShip);
+  console.log(getCoord(startMyShip));
+
+  function getCoord(array) {
+    var values = [];
+  
+    for (let key in array){
+      // values.push(Array.join(array[key].coord));
+      let tmp = [];
+      for(let index = 0; index < array[key].coord.length; index++){
+        tmp.push(Array.join(array[key].coord[index]))
+        console.log('array[key].coord[index]', array[key].coord[index]);
+        
+      }
+      values.push(tmp)
+    }
+    return values;
+  };
+
+  function find (array, search){
+    console.log(array.indexOf(search));
+    
+  }
+
+  find(getCoord(startMyShip), [0, 0]);
+  
   const [myShips, setMyShips] = React.useState(
-    ships(generetShips())
+    ships(startMyShip)
   );
 
   const [enemyShips, setEnemyShips] = React.useState([
